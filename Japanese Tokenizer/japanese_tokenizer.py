@@ -7,8 +7,8 @@
 
 import sys
 #from tokenize import tokenize
-#input_file = sys.argv[1]
-#output_file = sys.argv[2]
+input_file = sys.argv[1]
+output_file = sys.argv[2]
 
 
 def tokenize (line, japanese_text_dict):
@@ -19,10 +19,12 @@ def tokenize (line, japanese_text_dict):
 	while (i< len(line)):
 		if line[i] in japanese_text_dict:
 			the_list.append(line[i])
+			print(the_list)
+			#return the_list
 		else:
 			current_char = line[i]
 			found = False
-			while (i < len (line) and (not found)):
+			while (i < (len (line)-1) and (not found)):
 				current_char = current_char + line[i+1]
 				if current_char in japanese_text_dict:
 					the_list.append(current_char)
@@ -30,6 +32,7 @@ def tokenize (line, japanese_text_dict):
 				else:
 					i = i+1
 	the_string = the_string.join(the_list)
+	print(the_list)
 	open_out.write(the_string)
 
 
@@ -47,7 +50,7 @@ with open(dict_file, 'r', encoding='utf-8') as read_in:
 with open(in_file, 'r', encoding='utf-8') as open_in:
 	with open(out_file, 'w', encoding='utf-8') as open_out:
 		for line in open_in.readlines():
-			print(line)
+			#print(line)
 			the_line = tokenize(line, japanese_text_dict)
 
 
